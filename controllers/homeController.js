@@ -1,5 +1,16 @@
 module.exports.home = function(req,res)
 {
-    return res.send('<h1>Controller Working Fine</h1>');
+    return res.render('home',
+    {
+        title:"Socialise"
+    });
     
+}
+
+module.exports.user_profile = function(req,res)
+{
+    return res.render('userProfile',
+    {
+        title:"User Profile"
+    })
 }
