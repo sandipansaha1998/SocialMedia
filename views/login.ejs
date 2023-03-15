@@ -1,0 +1,28 @@
+<form action="/login" method="POST" id="login-form"></form>
+<div class="container ">
+    <div class="row d-lg-flex flex-lg-column  align-items-lg-center">
+        <div id="login-form-conatiner" class="col-lg-5   test">
+            <div class="test d-flex  flex-column align-items-start m-3 ">
+                <label for="email-id" class="form-label">Email address</label>
+                <div class="col-12"><input type="email" class="form-control " id="email-id" name="email"
+                        form="login-form" placeholder="name@example.com">
+                </div>
+            </div>
+
+            <div class="test d-flex  flex-column align-items-start m-3 ">
+                <label for="password" class="form-label">Password</label>
+                <div class="col-12 "><input type="password" class="form-control " id="password" name="password"
+                        form="login-form" placeholder="name@example.com"></div>
+            </div>
+            <div class="text-end">Forget Password?</div>
+            <button id="login-button" type="submit" class="col-4 btn btn-primary mb-3" form="login-form">Login</button>
+        </div>
+        <a href="/sign-up"><button id="open-signUp" class="col-4 btn btn-success m-2">Create new account</button></a>
+    </div>
+
+
+
+
+
+</div>
+<script src="/js/home.js"></script>

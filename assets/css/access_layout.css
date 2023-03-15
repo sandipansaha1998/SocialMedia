@@ -1,0 +1,13 @@
+body {
+  background-color: bisque;
+  text-align: center;
+}
+#login-form-conatiner {
+  background-color: white;
+  box-shadow: 0 4px 12px 8px rgba(0, 0, 0, 0.2);
+}
+
+#sign-up-form-container {
+  background-color: white;
+  box-shadow: 0 4px 12px 8px rgba(0, 0, 0, 0.2);
+}
