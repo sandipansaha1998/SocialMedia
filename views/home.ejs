@@ -1,2 +1,41 @@
 <link rel="stylesheet" href="/css/home.css">
 <h1>Socialise/Home</h1>
+<section id="feed-posts">
+    <form action="/post/create-new-post" method="POST" id="new-post-form">
+        <textarea name="content" cols="30" row="3" form="new-post-form" placeholder="Whats on your mind"></textarea>
+        <input type="submit" value="Post">
+    </form>
+
+    <!-- Display the posts from the locals -->
+    <div id="posts-list-container">
+        <ul>
+            <!-- Adding Post accessibilty  -->
+            <% for(post of posts){ %>
+                <li style="border: 1px solid black; margin:10px">
+                    <%=post.content%>
+
+                        <span style="color:green">
+                            <%=post.user.name%>
+                        </span>
+
+                        <div id="comments-container">
+                            <ul style="color:red">
+                                <%for(comment of post.comments){%>
+                                    <%=comment.content %>
+                                        <%=comment.user.name%>
+                                            <br>
+                                            <% } %>
+                            </ul>
+                        </div>
+                        <form action="/comment/create-comment" method="POST" id="<%=post._id%>">
+                            <input type="text" name="content" placeholder="Write a comment..." form="<%=post._id%>">
+                            <input type="hidden" name="postID" value="<%=post._id%>" form="<%=post._id%>">
+                            <input type="submit" form="<%=post._id%>" hidden />
+                        </form>
+                </li>
+                <% } %>
+
+        </ul>
+    </div>
+
+</section>

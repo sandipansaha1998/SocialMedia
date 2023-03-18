@@ -8,7 +8,7 @@ passport.use(new LocalStrategy({
 // Callback function whenever local strategy is used
 async function(email,password,done){
     //Find a user and establish the identity
-    console.log(email+" "+password);
+    // console.log(email+" "+password);
     await User.findOne({email:email}).then(user=>{
         if(!user || user.password!=password)
             {
@@ -16,7 +16,7 @@ async function(email,password,done){
             console.log("Invalid username/password")
             return done(null,false);
             }
-        console.log(user);
+        // console.log(user);
         return done(null,user);
     }
     ).catch(err => {console.log("Error in finding the user");return err})
@@ -25,30 +25,20 @@ async function(email,password,done){
 
 // serializing the user to decide which key is to be added to the cookies
 passport.serializeUser(function(user,done){
-    console.log("Serialised");
+    // console.log("Serialised");
     done(null,user._id);
 })
 // deserialising the user from the key in the cookies
 passport.deserializeUser(async function(userID,done){
-    console.log("Deserialised");
+    // console.log("Deserialised");
     const userInfo = await User.findById(userID).then(users => {return users}).catch(err=>{console.log("Error in finding the user");return done(err)});
-    console.log(userInfo);
+    // console.log(userInfo);
     return done(null,userInfo);
-
-   
-
-    // User.findById(user._id,function (err,user) {
-    //     if(err){
-    //         console.log('error in finding the user');
-    //         return done(err);
-    //     }
-    //     return done(null,user);
-    //   });
 });
 
 // Middleware to check Authentication
 passport.checkAuthentication = function(req,res,next){
-    console.log(req.isAuthenticated());
+    // console.log(req.isAuthenticated());
     // if the user is signedin,then
     if(req.isAuthenticated())
         return next();
@@ -58,10 +48,10 @@ passport.checkAuthentication = function(req,res,next){
 }
 
 passport.setAuthenticatedUser = function (req,res,next) {
-    console.log("Setting Locals");
-    console.log(req.isAuthenticated());
+    // console.log("Setting Locals");
+    // console.log(req.isAuthenticated());
     if(req.isAuthenticated()){
-        console.log(req.user);
+        // console.log(req.user);
         // req.user contains the current signed in user from the session cookie and this tranfers to the respond locals for view
         res.locals.user = req.user;
         console.log(res.locals)

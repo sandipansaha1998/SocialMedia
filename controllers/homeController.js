@@ -1,15 +1,29 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 
-
-module.exports.home = function(req,res)
+module.exports.home = async function(req,res)
 {
+    let posts = await Post.find({})
+                          .populate({
+                            path:'user'
+                          })
+                          .populate({
+                            path:'comments',
+                            populate:{
+                                path:'user'
+                            }
+                          })
+                          .then( data=>{return data})
+                          .catch(err => {return err;})
+    console.log(posts);
     return res.render('home',
     {
-        title:"Socialise"
+        title:"Socialise",
+        posts:posts,
+        
     });
     
 }
-
 module.exports.login = function (req,res) 
 {
     if(req.isAuthenticated())
@@ -22,7 +36,6 @@ module.exports.login = function (req,res)
         layout:'access_layout'
     })
 }
-
 module.exports.signUp = function(req,res)
 {
     if(req.isAuthenticated())
@@ -35,17 +48,6 @@ module.exports.signUp = function(req,res)
     })
 }
 
-module.exports.createSession = async function(req,res)
-{
-   return res.redirect('/')
-}
-
-module.exports.destroySession = function(req,res)
-{
-    req.logout(function(err) {
-        if (err) { return next(err); }});
-    return res.redirect('/')
-}
 
 
 
@@ -57,22 +59,7 @@ module.exports.destroySession = function(req,res)
 
 
 
-module.exports.createUser = async function(req,res)
-{   
 
-    let newUser = {
-        email:req.body.email,
-        password:req.body.password,
-        name:req.body.fName+' '+req.body.lName
-    }
-    const createUser = await User.create(newUser).then(
-        newUser => 
-        {
-            console.log(`User created succesfully`); 
-            return res.redirect('/')}) 
-            .catch(error=>{console.log(`Error in creating user`); return res.redirect('back')});
-   
-}
 
 module.exports.user_profile = function(req,res)
 {
