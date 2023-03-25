@@ -3,7 +3,8 @@ const Post = require('../models/post');
 
 module.exports.home = async function(req,res)
 {
-    let posts = await Post.find({})
+    try{
+        let posts = await Post.find({})
                           .populate({
                             path:'user'
                           })
@@ -12,16 +13,19 @@ module.exports.home = async function(req,res)
                             populate:{
                                 path:'user'
                             }
-                          })
-                          .then( data=>{return data})
-                          .catch(err => {return err;})
-    console.log(posts);
-    return res.render('home',
-    {
-        title:"Socialise",
-        posts:posts,
-        
-    });
+                          });
+        return res.render('home',
+        {
+            title:"Socialise",
+            posts:posts,            
+        });
+
+    }catch(e){
+        console.log('Error',e);
+    }
+    
+                          
+  
     
 }
 module.exports.login = function (req,res) 

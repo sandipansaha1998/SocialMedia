@@ -9,7 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local');
 const MongoStore =  require('connect-mongo');
-
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
 
 
 // Using Static files
@@ -44,7 +45,9 @@ app.use(express.urlencoded());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passportLocal.setAuthenticatedUser);//Middleware which passes on the user{} from the req{} to res{} for views to access it 
-
+// Uses session cookies
+app.use(flash());
+app.use(customMware.setFlash);
 // use express routers
 app.use('/',require('./routes'));
 app.listen(port,function(err){

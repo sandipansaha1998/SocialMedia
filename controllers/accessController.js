@@ -1,14 +1,23 @@
 const User = require('../models/user');
 
-module.exports.createSession = async function(req,res)
+module.exports.createSession =  function(req,res)
 {
+   req.flash('success','Logged in Successfully');
    return res.redirect('/');
 }
 
 module.exports.destroySession = function(req,res)
 {
-    req.logout(function(err) {
-        if (err) { return next(err); }});
-    return res.redirect('/')
-}
+  
+    req.logout(function(err){
+        if (err) { console.log(err); return; } 
+        req.flash('success','Logged out');
+        return res.redirect('/login');
+      });
+    
+      
+      
+};
+    
+
 

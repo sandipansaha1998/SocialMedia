@@ -3,7 +3,6 @@ const User = require('../models/user');
 
 module.exports.createUser = async function(req,res)
 {   
-
     let newUser = {
         email:req.body.email,
         password:req.body.password,
@@ -12,8 +11,11 @@ module.exports.createUser = async function(req,res)
     const createUser = await User.create(newUser).then(
         newUser => 
         {
-            console.log(`User created succesfully`); 
-            return res.redirect('/')}) 
-            .catch(error=>{console.log(`Error in creating user`); return res.redirect('back')});
-   
+            req.flash('success','User Successfully Created');
+            return res.redirect('/login');
+        })
+        .catch(error=>{
+            req.flash('error',error);
+            return res.redirect('back');
+        });  
 }

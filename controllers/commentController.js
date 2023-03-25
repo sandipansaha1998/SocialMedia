@@ -3,22 +3,41 @@ const Comment = require('../models/comment');
 
 module.exports.createComment = async function(req,res)
 {
-    console.log(req.body.content+" "+req.body.content+" "+req.body.postID);
+    try{
+    const post =  await Post.findById(req.body.postID);
     
-    const newComment = await Post.findById(req.body.postID).then(async function(post) {
-        if(post)
-        {
-            console.log(post);
-            await Comment.create({
-                content:req.body.content,
-                postID:req.body.postID,
-                user:req.user._id,
-                
-            }).then(comment =>{
-                post.comments.push(comment);
-                post.save();
-                res.redirect('/');
-            });
-        }
-    })
-}
+    if(post){
+        let comment =  await Comment.create({
+            content:req.body.content,
+            postID:req.body.postID,
+            user:req.user._id, 
+        });
+        post.comments.push(comment);
+        post.save();
+        res.redirect('/');
+    }
+    else
+    {
+        res.redirect('/');
+    }
+    }catch(e){
+        console.log("Error",e);
+    }
+};
+
+module.exports.destroy  = async function(req,res){
+    let comment = await Comment.findById(req.params.id);
+    console.log(comment);
+    try{
+    if(comment.user == req.user.id)
+    {
+    await Post.findByIdAndUpdate(comment.post,{$pull:{comments:req.params.id}});
+    comment.deleteOne();
+    return res.redirect('back');
+    }
+    else
+        return res.redirect('back');
+    }catch(e){
+        console.log("Error",e);
+    }
+};
