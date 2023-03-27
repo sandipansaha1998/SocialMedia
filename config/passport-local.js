@@ -14,7 +14,7 @@ async function(req,email,password,done){
         if(!user || user.password!=password)
             {
         // Authentication is false and error is null
-            req.flash('error','Incorrect Username/Password')
+            req.flash('error','Incorrect Username/Password');
             return done(null,false);
             }
         // console.log(user);

@@ -14,6 +14,17 @@ module.exports.createComment = async function(req,res)
         });
         post.comments.push(comment);
         post.save();
+        if(req.xhr){
+            return res.status(200).json({
+                data:{
+                    comment:comment,
+                    message:"Comment Created",
+                    username:req.user.name,
+                    postID:req.body.postID,
+                    }
+                })
+            
+        }
         res.redirect('/');
     }
     else
@@ -27,12 +38,22 @@ module.exports.createComment = async function(req,res)
 
 module.exports.destroy  = async function(req,res){
     let comment = await Comment.findById(req.params.id);
-    console.log(comment);
+    console.log(req.params.id);
     try{
     if(comment.user == req.user.id)
     {
     await Post.findByIdAndUpdate(comment.post,{$pull:{comments:req.params.id}});
     comment.deleteOne();
+    if(req.xhr){
+        return res.status(200).json({
+            data:{
+                commentID:comment._id,
+                postID:req.body.postID,
+                message:"Comment Deleted"
+                }
+            })
+        
+    }
     return res.redirect('back');
     }
     else
