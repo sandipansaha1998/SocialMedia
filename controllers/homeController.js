@@ -68,7 +68,7 @@ module.exports.signUp = function(req,res)
 
 module.exports.user_profile = function(req,res)
 {
-    console.log("Locals"+res.locals.user)
+  
     return res.render('userProfile',
     {
         title:"User Profile"

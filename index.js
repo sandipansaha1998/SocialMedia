@@ -42,6 +42,11 @@ app.use(session({
 }));
 app.use(cookieParser());
 app.use(express.urlencoded());
+//make the uploads path available to the browser
+app.use('/uploads',express.static(__dirname+'/uploads'));
+
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passportLocal.setAuthenticatedUser);//Middleware which passes on the user{} from the req{} to res{} for views to access it 

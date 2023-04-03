@@ -1,4 +1,8 @@
 body {
   text-align: center;
-  background-color: aqua;
+  background-color: rgb(192, 184, 184);
+}
+
+.profile-picture {
+  border-radius: 50%;
 }

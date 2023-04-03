@@ -1,4 +1,40 @@
-<h1>
-    Profile page
-    <%=user.name %>
-</h1>
+<form action="/user/update/<%=locals.user.id%>" method="POST" id="update-form" enctype="multipart/form-data"></form>
+<div class="row d-lg-flex flex-lg-column  align-items-lg-center">
+    <div id="update-form-container" class="test container col-6 mt-3">
+        <div class="row border-bottom border-dark mb-1">
+            <h4 class="text-start">General Account Settings</h4>
+        </div>
+        <div class="row">
+            <div class="col-6 container">
+                <img class="profile-picture" src="<%=locals.user.avatar%>" alt="Profile picture" width="150"
+                    height="150">
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-6 ">
+                <div class="test d-flex  flex-column align-items-start m-1 ">
+                    <div class="col-12"><input type="text" class="form-control " id="fName" name="fName"
+                            form="update-form" value="<%= locals.user.name.split(' ')[0] %>" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="test d-flex  flex-column align-items-start m-1 ">
+                    <div class="col-12"><input type="text" class="form-control " id="lName" name="lName"
+                            form="update-form" value="<%= locals.user.name.split(' ')[1] %>" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 container "><input type="file" class="form-control " name="avatar" form="update-form"
+                    placeholder="Choose Files">
+            </div>
+        </div>
+
+
+
+        <button id="update-button" type="submit" class="col-4 btn btn-success mb-3" form="update-form">Update</button>
+
+
+
+    </div>
+</div>

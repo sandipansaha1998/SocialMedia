@@ -5,5 +5,6 @@ const passport = require('passport');
 
 const userController = require('../controllers/userController');
 
-router.post('/create-user',userController.createUser);
+router.post('/create',userController.createUser);
+router.post('/update/:id',passportLocal.checkAuthentication,userController.update)
 module.exports=router;
