@@ -13,8 +13,13 @@ module.exports.home = async function(req,res)
                             path:'comments',
                             populate:{
                                 path:'user'
-                            }
+                            },
+                            options: {
+                                sort: { 'createdAt': -1 }
+                              }
+                          
                           });
+        // console.log(posts[0].comments);
         return res.render('home',
         {
             title:"Socialise",
