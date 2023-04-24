@@ -5,24 +5,38 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod_start": "SOCIALISE_ENVIROMENT=production nodemon index.js"
   },
   "author": "Sandipan Saha",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.21.4",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",
+    "del": "^7.0.0",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
+    "gulp-babel": "^8.0.0",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-rev": "^10.0.0",
+    "gulp-uglify-es": "^3.0.0",
     "kue": "^0.11.6",
     "mongoose": "^7.0.1",
+    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.1",
     "node-sass-middleware": "^1.0.1",
     "nodemailer": "^6.9.1",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "rotating-file-stream": "^3.1.0"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25",
+    "gulp": "^4.0.2"
   }
 }

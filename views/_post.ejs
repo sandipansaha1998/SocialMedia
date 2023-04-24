@@ -8,6 +8,19 @@
                 <span style="color:green">
                     <%=post.user.name%>
                 </span>
+                <!-- ADD to XHR also -->
+                <span>
+                    <!-- if req.locals.user in post.likes -->
+                    <% if(post.likes.includes(locals.user)){ %>
+                        <button class="like-Post" id="like-<%=post.id%>" style="color:red">
+                            Like
+                        </button>
+                        <% }else{ %>
+                            <button class="like-Post" id="like-<%=post.id%>" style="color:black">
+                                Like
+                            </button>
+                            <%}%>
+                </span>
                 <div id="comments-container">
                     <ul style="color:red">
                         <%for(comment of post.comments){%>

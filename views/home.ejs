@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="<%=assetPath('css/home.css')  %>">
 <h1>Socialise/Home</h1>
 <section id="feed-posts">
     <form action="/post/create" method="POST" id="new-post-form">
@@ -18,5 +18,5 @@
         </ul>
     </div>
 </section>
-
-<script src="/js/home_posts.js"></script>
+<script src="<%=assetPath('js/like.js')%>"></script>
+<script src="<%=assetPath('js/home_posts.js')%>"></script>

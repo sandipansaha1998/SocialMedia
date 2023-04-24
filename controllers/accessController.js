@@ -13,11 +13,5 @@ module.exports.destroySession = function(req,res)
         if (err) { console.log(err); return; } 
         req.flash('success','Logged out');
         return res.redirect('/login');
-      });
-    
-      
-      
+      });    
 };
-    
-
-

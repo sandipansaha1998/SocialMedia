@@ -11,10 +11,15 @@ const passportLocal = require('./config/passport-local');
 const MongoStore =  require('connect-mongo');
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
-
-
+const env = require('./config/enviroment')
+const path = require('path')
+const logger = require('morgan');
+require('./config/view-helpers')(app);
+const fs = require('fs');
+console.log(env.asset_path);
 // Using Static files
-app.use(express.static('./assets'));
+app.use(express.static(path.join(__dirname,env.asset_path)));
+console.log(env.session_cookie_key)
 // Using Layouts
 app.use(expressLayouts);
 // Extarct styles and scripts from subpages into the layout
@@ -28,7 +33,7 @@ app.set('views','./views');
 app.use(session({
     name:'socialise',
     // TODO change the secrect before deployment
-    secret:'asd',
+    secret:env.session_cookie_key,
     saveUninitialized:true,
     resave:true,
     cookie:{
@@ -36,12 +41,13 @@ app.use(session({
     },
     store:new MongoStore(
         {
-            mongoUrl:'mongodb://localhost/socialise_development'
+            mongoUrl:`mongodb://localhost/${env.db}`
         }
     )
 }));
 app.use(cookieParser());
 app.use(express.urlencoded());
+app.use(logger(env.morgan.mode,env.morgan.options))
 //make the uploads path available to the browser
 app.use('/uploads',express.static(__dirname+'/uploads'));
 

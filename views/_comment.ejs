@@ -3,6 +3,11 @@
         <%=comment.user.name%>
             <% if(comment.user.id==locals.user.id ){ %>
                 <a class="delete-comment-button" href="/comment/destroy/<%=comment.id%>">Delete</a>
+                <span>
+                    <button class="like-Comment" id="comment-<%=comment.id%>" style="color:red">
+                        Like
+                    </button>
+                </span>
                 <% } %>
                     <br>
 </li>

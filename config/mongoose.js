@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/socialise_development');
+const env = require('../config/enviroment')
+mongoose.connect(`mongodb://localhost/${env.db}`);
 
 
 const db = mongoose.connection;
@@ -8,7 +9,7 @@ db.on('error',console.error.bind(console,"Error connecting to MongoDB"));
 
 
 db.once('open',function(){
-    console.log('Connected to Database :: MongoDB');
+    console.log(`Connected to Database :: MongoDB ${env.db}`);
 })
 
 module.exports = db;
